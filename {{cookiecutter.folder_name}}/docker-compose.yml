@@ -17,6 +17,11 @@ services:
 
             # splash
             - "8050:8050"
+        networks:
+          aq-lb-splashes:
+          aq-splash:
+            aliases:
+              - splash.simplelegal.com    
         links:
             {%- for i in range(num_splashes) %}
             - splash{{i}}
