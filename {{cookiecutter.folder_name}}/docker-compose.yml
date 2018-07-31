@@ -4,7 +4,6 @@
 {% set maxrss = cookiecutter.maxrss_mb | int %}
 {% set mem_limit = "%dm" | format(maxrss * 1.4) %}
 {% set memswap_limit = "%dm" | format(maxrss * 1.8) %}
-{% set tor = cookiecutter.tor | int %}
 {% set verbosity = cookiecutter.splash_verbosity %}
 
 version: '2'
@@ -32,28 +31,16 @@ services:
         command: --max-timeout {{ max_timeout }} --slots {{ splash_slots }} --maxrss {{ maxrss }} --verbosity {{ verbosity }}
         expose:
             - 8050
+        networks:
+          aq-lb-splashes:
+            aliases:
+              - splash{{i}}.simplelegal.com    
         mem_limit: {{ mem_limit }}
         memswap_limit: {{ memswap_limit }}
         restart: always
 
-        {%- if tor %}
-        links:
-            - tor
-        volumes:
-            - ./proxy-profiles:/etc/splash/proxy-profiles:ro
-            - ./filters:/etc/splash/filters:ro
-        {%- endif %}
-
     {%- endfor %}
 
-
-    {% if tor %}
-    tor:
-        image: jess/tor-proxy
-        expose:
-            - 9050
-        logging:
-            driver: "none"
-        restart: always
-
-    {% endif %}
+networks:
+  aq-splash:
+  aq-lb-splashes:

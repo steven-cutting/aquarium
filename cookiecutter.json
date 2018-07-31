@@ -1,18 +1,11 @@
 {
     "folder_name": "aquarium",
     "num_splashes": 3,
-    "splash_version": "3.0",
-    "auth_user": "user",
-    "auth_password": "userpass",
+    "splash_version": "3.2",
     "splash_verbosity": 1,
-    "max_timeout": 3600,
+    "max_timeout": 13000,
     "maxrss_mb": 3000,
     "splash_slots": 5,
     "stats_enabled": 1,
-    "stats_auth": "admin:adminpass",
-    "tor": 1,
-
-    "_copy_without_render": [
-        "*filters/*.txt"
-    ]
+    "stats_auth": "admin:adminpass"
 }
